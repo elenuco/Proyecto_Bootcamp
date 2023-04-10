@@ -20,6 +20,7 @@ class Estudiante extends Model
         'genero',
         'foto',
         'telefono',
+        'estado_estudiante',
         'usuario_id',
         'grado_id',
         'institucion_id'

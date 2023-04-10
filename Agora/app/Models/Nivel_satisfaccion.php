@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cuestionario extends Model
+class Nivel_satisfaccion extends Model
 {
     use HasFactory;
     protected $table = 'cuestionario';
@@ -13,6 +13,10 @@ class Cuestionario extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        
+        'nivel_calificacion',
+        'comentario',
+        'fecha_registro',
+        'estado_resena',
+        'estudiante_id',
     ];
 }

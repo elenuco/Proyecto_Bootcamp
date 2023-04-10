@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\Nivel_satisfaccionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,4 +25,6 @@ Route::get("/estudiante/listar",[EstudianteController::class, "listar"]);
 Route::get("/estudiante/obtener/{id_estudiante}",[EstudianteController::class, "obtener"]);
 Route::post("/estudiante/insertar",[EstudianteController::class, "insertar"]);
 
+//Nivel
+Route::get("/nivel_satisfaccion/listar",[Nivel_satisfaccionController::class, "listar"]);
 
