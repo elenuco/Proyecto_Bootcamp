@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  DateTime;
 use App\Models\Rol;
-use App\Http\Controllers\ response()->download($pathToFile, $name, $headers);
+
 
 class RolController extends Controller
 {
@@ -22,7 +22,7 @@ class RolController extends Controller
     public function IngresarRol(Request $Request)
     {
         $data= array(
-            'tipo_rol'=>$Request->$tipo_rol
+            'tipo_rol'=>$Request->tipo_rol
         );
         $nuevo_rol= new Rol($data);
         $nuevo_rol->save();
@@ -32,7 +32,7 @@ class RolController extends Controller
     {
         $rol= Rol::where('id',$id)->first;
         $data= array(
-            'tipo_rol'=>$Request->$tipo_rol
+            'tipo_rol'=>$request->tipo_rol
         );
         $rol->save();
         return response()->json($rol);
