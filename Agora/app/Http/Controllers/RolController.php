@@ -19,7 +19,7 @@ class RolController extends Controller
         $rol= Rol::where('id','=',$id)->first();
         return response()->json($rol);
     }
-    public function IngresarRol(Request $Request)
+    public function ingresarRol(Request $Request)
     {
         $data= array(
             'tipo_rol'=>$Request->$tipo_rol

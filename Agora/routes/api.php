@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/rol/listarRol',[RolController::class, 'listarRol']);
+Route::get('/rol/obtnerRol/{id}', [RolController::class,'obtenerRol']);
+Route::get('/rol/ingresarRol',[RolController::class,'ingresarRol']);
+//users routes
+Route::get('usuarios/listarUsuario', [UsuarioController::class, 'listaUsuario']);
+Route::get('usuarios/obtenerUsuario/{id}',[UsuarioController::class,'obtenerUsuario']);
+Route::post('usuarios/ingresarUsuario', [UsuariosController::class,'ingresarUsuario']);

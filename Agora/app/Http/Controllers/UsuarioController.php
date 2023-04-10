@@ -8,7 +8,7 @@ use App\Models\usuarios;
 
 class UsuarioController extends Controller
 {
- public function ListaUsuarios(Request $Request)
+ public function listaUsuarios(Request $Request)
     {
         $usuario= usuarios::select(
         'correo',
@@ -27,7 +27,7 @@ class UsuarioController extends Controller
         $usuario= usuarios::where('id', '=', $id)->first();
         return response()->json();
     }
-    public function Ingresar_Usuario(Request $Request)
+    public function ingresarUsuario(Request $Request)
     {
         $data=array(
             'correo'=>$Request->correo,
