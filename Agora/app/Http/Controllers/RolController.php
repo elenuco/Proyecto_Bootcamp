@@ -28,4 +28,22 @@ class RolController extends Controller
         $nuevo_rol->save();
         return response()->json($nuevo_rol);
     }
+    public function actualizar(Request $request, $id)
+    {
+        $rol= Rol::where('id',$id)->first;
+        $data= array(
+            'tipo_rol'=>$Request->$tipo_rol
+        );
+        $rol->save();
+        return response()->json($rol);
+    }
+    public function eliminar(Request $Request, $id)
+    {
+        $rol= Rol::where('id',$id)->first();
+        if ($rol==null) {
+            $mensaje=array(
+                'error'=>"Rol no encontrado"
+            );
+        }
+    }
 }
