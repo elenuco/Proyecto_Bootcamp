@@ -44,4 +44,32 @@ class UsuarioController extends Controller
         $nuevo_usuario->save();
         return response()->json($nuevo_usuario);
     }
+    public function actualizarUsuario(Request $request,$id)
+    {
+        $usuario=usuarios::where('id', $id)->first;
+        $data=array(
+            'correo'=>$request->correo,
+            'contrasena'=>$request->contrasena,
+            'estado'=>$request->estado,
+            'fecha_registro'=>$request->fecha_registro,
+            'ultimo_acceso'=>$request->ultimo_acceso,
+            'rol_id'=>$request->rol_id,
+            'sesion'=>$request->sesion,
+            'tiempo_uso'=>$request->tiempo_uso
+        );
+        $usuario->save();
+        return response()->json($usuario);
+    }
+    public function eliminar(Request $request, $id)
+    {
+        $usuario= usuarios::where('id', $id)->first();
+        if ($usuario==null) {
+            $mensaje=array(
+                'error'=>"Rol no encontrado"
+            );
+        }
+        $usuario->estado=0;
+        $usuario->save();
+        return response()->json('usuario eliminado exitosamente');
+    }
 }
