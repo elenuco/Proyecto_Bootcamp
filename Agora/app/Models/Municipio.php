@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grado extends Model
+class Municipio extends Model
 {
     use HasFactory;
 
-    protected $table = 'grado';
-
-    public $timestamps = false;
+    protected $table = 'municipio';
+    public $timestamp = false;
 
     protected $fillable = [
-        'grado_academico',
+        'id_municipio',
     ];
 
-    protected $primaryKey='id_grado';
+    protected $primaryKey = 'id_municipio';
+
+    
 }

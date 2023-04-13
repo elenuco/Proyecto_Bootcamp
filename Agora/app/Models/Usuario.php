@@ -14,15 +14,19 @@ class Usuario extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'nombre',
+        'apellido',
         'correo',
-        'contrasena',
-        'estado',
+        'password',
+        'estado_usuario',
         'fecha_registro',
-        'fecha:actualizado',
+        'fecha:actualizacion',
         'inicio_sesion',
         'ultimo_acceso',
+        'tiempo_uso',
         'rol_id',
-        'sesion',
-        'tiempo_uso'
+        
     ];
+
+    protected $primaryKey = 'id_usuario';
 }

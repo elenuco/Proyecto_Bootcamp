@@ -14,15 +14,17 @@ class Estudiante extends Model
 
     protected $fillable = [
         'nie',
-        'nombre',
-        'apellido',
         'fecha_nacimiento',
         'genero',
         'foto',
         'telefono',
         'estado_estudiante',
+        'estado_estudiante',
         'usuario_id',
         'grado_id',
-        'institucion_id'
+        'institucion_id',
+        'munici_id',
     ];
+
+    protected $primaryKey = 'id_estudiante';
 }
