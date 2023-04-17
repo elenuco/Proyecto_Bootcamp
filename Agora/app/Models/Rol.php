@@ -9,7 +9,8 @@ class Rol extends Model
 {
     use HasFactory;
     protected $table= "rol";
+public $timestamps=false;
     protected $fillable = [
-        'tipo_rol'
+        'rol_tipo'
     ];
 }
