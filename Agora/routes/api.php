@@ -25,8 +25,8 @@ Route::post('/rol/ingresarRol',[RolController::class,'ingresarRol']);
 Route::put('rol/actualizarRol/{id}',[RolController::class,'actualizar']);
 Route::delete('rol/delete/{id}', [RolController::class,'eliminar']);
 //users routes
-Route::get('usuarios/listarUsuario', [UsuarioController::class, 'listaUsuario']);
+Route::get('usuarios/listarUsuario', [UsuarioController::class, 'listaUsuarios']);
 Route::get('usuarios/obtenerUsuario/{id}',[UsuarioController::class,'obtenerUsuario']);
-Route::post('usuarios/ingresarUsuario', [UsuariosController::class,'ingresarUsuario']);
+Route::post('usuarios/ingresarUsuario', [UsuarioController::class,'ingresarUsuario']);
 Route::put('usuarios/actualizar/{id}', [UsuarioController::class,'actualizarUsuario']);
 Route::delete('usuarios/eliminar/{id}', [UsuarioController::class,'eliminar']);
