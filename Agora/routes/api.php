@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\InsigniaController;
+use App\Http\Controllers\CuestionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,9 @@ Route::put("/insignia/actualizar/{id}",[InsigniaController::class,"actualizar"])
 Route::delete("/insignia/eliminar/{id}",[InsigniaController::class,"eliminar"]);
 
 
-
+//Rutas para controlador Cuestionario
+Route::get("/cuestionario/listar", [CuestionarioController::class, 'listar']);
+Route::get("/cuestionario/obtener/{id}", [CuestionarioController::class, 'obtener']);
 
 
 
