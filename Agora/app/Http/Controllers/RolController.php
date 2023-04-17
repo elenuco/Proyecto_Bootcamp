@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use  DateTime;
 use App\Models\Rol;
-<<<<<<< HEAD
-
-=======
->>>>>>> Develop-Elena
 
 class RolController extends Controller
 {
@@ -25,11 +21,7 @@ class RolController extends Controller
     public function ingresarRol(Request $request)
     {
         $data= array(
-<<<<<<< HEAD
-            'tipo_rol'=>$Request->tipo_rol
-=======
             'rol_tipo'=>$request->rol_tipo
->>>>>>> Develop-Elena
         );
         // return $data;
         $nuevo_rol= new Rol($data);
