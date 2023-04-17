@@ -17,6 +17,8 @@ class Institucion extends Model
         'tipo_institucion',
         'estado_institucion',
         'logo',
-        'depa_id'
+        'municipio_id'
     ];
+
+    protected $primaryKey = 'id_institucion';
 }

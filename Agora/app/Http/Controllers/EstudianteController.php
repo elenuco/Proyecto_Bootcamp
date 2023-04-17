@@ -55,7 +55,7 @@ class EstudianteController extends Controller
             ->join('municipio', 'estudiante.munici_id', '=', 'municipio.id_municipio')
             ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
             ->select('estudiante.id_estudiante', 'nie', 'usuario.nombre', 'usuario.apellido', 'estudiante.fecha_nacimiento', 'estudiante.genero', 'estudiante.foto', 'estudiante.telefono', 'estudiante.estado_estudiante', 'usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento');
-        $estudiante = $estudiante->first();
+            $estudiante = $estudiante->first();
 
         if ($estudiante == null) {
             $mensaje = array(
@@ -96,10 +96,11 @@ class EstudianteController extends Controller
             return response()->json($mensaje, 404);
         }
 
-        $institucion = Institucion::where('id_institucion', '=', $request->institucion_id)->first();
+        $institucion = Institucion::where('id_institucion', '=', $request->institucion_id)
+        ->where('estado_institucion', '=', 1)->first();
         if ($institucion == null) {
             $mensaje = array(
-                'mensaje' => "Institucion no encontrada."
+                'mensaje' => "Institucion no encontrada o no activa."
             );
 
             return response()->json($mensaje, 404);
@@ -140,7 +141,6 @@ class EstudianteController extends Controller
     public function actualizar(Request $request, $id)
     {
         $estudiante = Estudiante::where("id_estudiante", $id)->first();
-
         if ($estudiante == null) {
             $mensaje = array(
                 'error' => "Estudiante no encontrado."
