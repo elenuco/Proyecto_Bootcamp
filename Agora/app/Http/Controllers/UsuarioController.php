@@ -8,7 +8,7 @@ use App\Models\usuarios;
 
 class UsuarioController extends Controller
 {
- public function ListaUsuarios(Request $Request)
+ public function listaUsuarios(Request $Request)
     {
         $usuario= usuarios::select(
         'correo',
@@ -27,7 +27,7 @@ class UsuarioController extends Controller
         $usuario= usuarios::where('id', '=', $id)->first();
         return response()->json();
     }
-    public function Ingresar_Usuario(Request $Request)
+    public function ingresarUsuario(Request $Request)
     {
         $data=array(
             'correo'=>$Request->correo,
@@ -43,5 +43,33 @@ class UsuarioController extends Controller
         $nuevo_usuario= new usuarios($data);
         $nuevo_usuario->save();
         return response()->json($nuevo_usuario);
+    }
+    public function actualizarUsuario(Request $request,$id)
+    {
+        $usuario=usuarios::where('id', $id)->first;
+        $data=array(
+            'correo'=>$request->correo,
+            'contrasena'=>$request->contrasena,
+            'estado'=>$request->estado,
+            'fecha_registro'=>$request->fecha_registro,
+            'ultimo_acceso'=>$request->ultimo_acceso,
+            'rol_id'=>$request->rol_id,
+            'sesion'=>$request->sesion,
+            'tiempo_uso'=>$request->tiempo_uso
+        );
+        $usuario->save();
+        return response()->json($usuario);
+    }
+    public function eliminar(Request $request, $id)
+    {
+        $usuario= usuarios::where('id', $id)->first();
+        if ($usuario==null) {
+            $mensaje=array(
+                'error'=>"Rol no encontrado"
+            );
+        }
+        $usuario->estado=0;
+        $usuario->save();
+        return response()->json('usuario eliminado exitosamente');
     }
 }
