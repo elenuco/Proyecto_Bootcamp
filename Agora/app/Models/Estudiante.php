@@ -27,4 +27,9 @@ class Estudiante extends Model
     ];
 
     protected $primaryKey = 'id_estudiante';
+
+    /*public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
+    }*/
 }

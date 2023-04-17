@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 
 use DateTime;
@@ -12,6 +13,9 @@ use App\Models\Grado;
 use App\Models\Institucion;
 use App\Models\Municipio;
 use App\Models\Departamento;
+//use App\Models\Rol;
+use App\Http\Requests\NuevoEstudianteRequest;
+
 
 class EstudianteController extends Controller
 {
@@ -19,95 +23,191 @@ class EstudianteController extends Controller
 
     {
         $estudiante = Estudiante::all();
-        $estudiante=DB::table('estudiante')
-        ->join('usuario','estudiante.id_estudiante', '=', 'usuario.id_usuario')
-        ->join('grado', 'estudiante.grado_id','=', 'grado.id_grado')
-        ->join('institucion', 'estudiante.institucion_id', '=', 'institucion.id_institucion')
-        ->join('municipio','estudiante.munici_id', '=','municipio.id_municipio')
-        ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
-        ->select('estudiante.id_estudiante', 'nie', 'usuario.nombre','usuario.apellido','estudiante.fecha_nacimiento', 'estudiante.genero', 'estudiante.foto', 'estudiante.telefono', 'estudiante.estado_estudiante','usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento')->get();
+        $estudiante = DB::table('estudiante')
+            //->join('rol','usuario.rol','=','rol.id_rol')
+            ->join('usuario', 'estudiante.usuario_id', '=', 'usuario.id_usuario')
+            ->join('grado', 'estudiante.grado_id', '=', 'grado.id_grado')
+            ->join('institucion', 'estudiante.institucion_id', '=', 'institucion.id_institucion')
+            ->join('municipio', 'estudiante.munici_id', '=', 'municipio.id_municipio')
+            ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
+            ->select('estudiante.id_estudiante', 'nie', 'usuario.nombre', 'usuario.apellido', 'estudiante.fecha_nacimiento', 'estudiante.genero', 'estudiante.foto', 'estudiante.telefono', 'estudiante.estado_estudiante', 'usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento')
+            ->orderBy('estudiante.id_estudiante', 'asc')
+            ->get();
 
-        for ($i = 0; $i < count($estudiante); $i++) { 
-            if($estudiante[$i]->estado_estudiante == 1) {
+        for ($i = 0; $i < count($estudiante); $i++) {
+            if ($estudiante[$i]->estado_estudiante == 1) {
                 $estudiante[$i]->estado_estudiante = "activo";
             } else {
                 $estudiante[$i]->estado_estudinate = "inactivo";
             }
         }
         return response()->json($estudiante);
-        
-
-
-        /*$estudiante =Estudiante::select('id_estudiante', 'nie', 'nombre','apellido','fecha_nacimiento', 'genero', 'foto', 'telefono', 'estado_estudiante','usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion')
-        ->join('usuario', 'estudiante.usuario_id', '=', 'usuario.id_usuario')
-        ->join('grado', 'estudiante.grado_id','=', 'grado.id_grado')
-        ->join('institucion', 'estudiante.institucion_id', '=', 'institucion.id_institucion')
-        ->where('usuario.estado', '=', 1);  
-         $estudiante=$estudiante->get();*/
-
     }
 
 
-    public function obtener(Request $request, $id_estudiante)
+    public function obtener(Request $request, $id)
     {
-       $estudiante = Estudiante::where('id_estudiante', '=', $id_estudiante)
-       ->select('id_estudiante', 'nie', 'nombre','apellido','fecha_nacimiento', 'genero', 'foto', 'telefono','estado_estudainte','usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion')
-       ->join('usuario', 'estudiante.usuario_id', '=', 'usuario.id_usuario')
-       ->join('grado', 'estudiante.grado_id','=', 'grado.id_grado')
-       ->join('institucion', 'estudiante.institucion_id', '=', 'institucion.id_institucion');
+        $estudiante = DB::table('estudiante')
+            ->where('estudiante.id_estudiante', '=', $id)
+            ->join('usuario', 'estudiante.usuario_id', '=', 'usuario.id_usuario')
+            ->join('grado', 'estudiante.grado_id', '=', 'grado.id_grado')
+            ->join('institucion', 'estudiante.institucion_id', '=', 'institucion.id_institucion')
+            ->join('municipio', 'estudiante.munici_id', '=', 'municipio.id_municipio')
+            ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
+            ->select('estudiante.id_estudiante', 'nie', 'usuario.nombre', 'usuario.apellido', 'estudiante.fecha_nacimiento', 'estudiante.genero', 'estudiante.foto', 'estudiante.telefono', 'estudiante.estado_estudiante', 'usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento');
+        $estudiante = $estudiante->first();
 
-       $estudiante = $estudiante->first();
+        if ($estudiante == null) {
+            $mensaje = array(
+                'error' => "Estudiante no encontrado."
+            );
+            return response()->json($mensaje, 404);
+        }
 
-       if ($estudiante == null) {
-        $mensaje = array(
-            'error' => "Estudiante no encontrado."
-        );
+        if ($estudiante->estado_estudiante == 1) {
+            $estudiante->estado_estudiante = "activo";
+        } else {
+            $estudiante->estado_estudiante = "inactivo";
+        }
 
-        return response()->json($mensaje, 404);
+        return response()->json($estudiante);
     }
 
-    return response()->json($estudiante);
-}
 
+    public function insertar(NuevoEstudianteRequest $request)
+    {
+        $request->validated();
 
-public function insertar(Request $request)
-{
+        $usuario = Usuario::where('id_usuario', '=', $request->usuario_id)->first();
+        if ($usuario == null) {
+            $mensaje = array(
+                'mensaje' => "Usuario no encontrado."
+            );
 
-    $datos = array(
-        'nie' => $request->nie,
-        'nombre'=> $request->nombre,
-        'apellido'=> $request->apellido,
-        'fecha_nacimiento'=> $request->fecha_nacimiento,
-        'genero'=> $request->genero,
-        'foto'=> $request->foto,
-        'telefono'=> $request->telefono,
-        'estado_estudiante' => $request->estado_estudiante,
-        'usuario_id'=> $request->usuario_id,
-        'grado_id'=> $request->grado_id,
-        'institucion_id'=>$request->institucion_id,
-    );
+            return response()->json($mensaje, 404);
+        }
 
-    $nuevoEstudiante = new Estudiante($datos);
-    $nuevoEstudiante->save();
-    return response()->json($nuevoEstudiante);
-}
+        $grado = Grado::where('id_grado', '=', $request->grado_id)->first();
+        if ($grado == null) {
+            $mensaje = array(
+                'mensaje' => "Grado no encontrado."
+            );
 
-public function actualizar(Request $request, $id_estudiante)
-{
-    $estudiante=Estudiante::where("id_estudiante",$id_estudiante)->first();
+            return response()->json($mensaje, 404);
+        }
 
-    if ($estudiante == null) {
-        $mensaje = array(
-            'error' => "Estudiante no encontrado."
+        $institucion = Institucion::where('id_institucion', '=', $request->institucion_id)->first();
+        if ($institucion == null) {
+            $mensaje = array(
+                'mensaje' => "Institucion no encontrada."
+            );
+
+            return response()->json($mensaje, 404);
+        }
+
+        $municipio = Municipio::where('id_municipio', '=', $request->munici_id)->first();
+        if ($municipio == null) {
+            $mensaje = array(
+                'mensaje' => "Municipio no encontrado."
+            );
+
+            return response()->json($mensaje, 404);
+        }
+
+        $datos = array(
+            'nie' => $request->nie,
+            'fecha_nacimiento' => $request->fecha_nacimiento,        
+            'genero' => $request->genero,
+            'foto' => $request->foto,
+            'telefono' => $request->telefono,
+            'estado_estudiante' => 1,
+            'usuario_id' => $request->usuario_id,
+            'grado_id' => $request->grado_id,
+            'institucion_id' => $request->institucion_id,
+            'munici_id' => $request->munici_id,
         );
 
-        return response()->json($mensaje, 404);
+        $nuevoEstudiante = new Estudiante($datos);
+        $nuevoEstudiante->save();
+        if ($nuevoEstudiante->estado_estudiante == 1) {
+            $nuevoEstudiante->estado_estudiante = "Activo";
+        } else {
+            $nuevoEstudiante->estado_estudiante = "Inactivo";
+        }
+        return response()->json($nuevoEstudiante);
     }
 
-    
-}
+    public function actualizar(Request $request, $id)
+    {
+        $estudiante = Estudiante::where("id_estudiante", $id)->first();
+
+        if ($estudiante == null) {
+            $mensaje = array(
+                'error' => "Estudiante no encontrado."
+            );
+            return response()->json($mensaje, 404);
+        }
+
+        $grado = Grado::where('id_grado', '=', $request->grado_id)->first();
+        if ($grado == null) {
+            $mensaje = array(
+                'mensaje' => "Grado no encontrado."
+            );
+
+            return response()->json($mensaje, 404);
+        }
+
+        $institucion = Institucion::where('id_institucion', '=', $request->institucion_id)->first();
+        if ($institucion == null) {
+            $mensaje = array(
+                'mensaje' => "Institucion no encontrada."
+            );
+
+            return response()->json($mensaje, 404);
+        }
+
+        $municipio = Municipio::where('id_municipio', '=', $request->munici_id)->first();
+        if ($municipio == null) {
+            $mensaje = array(
+                'mensaje' => "Municipio no encontrado."
+            );
+
+            return response()->json($mensaje, 404);
+        }
+
+        $estudiante->nie=$request->nie;
+        $estudiante->foto=$request->foto;
+        $estudiante->telefono=$request->telefono;
+        $estudiante->grado_id=$request->grado_id;
+        $estudiante->institucion_id=$request->institucion_id;
+        $estudiante->munici_id=$request->munici_id;
+        $estudiante->save();
+
+        return response()->json($estudiante);
 
 
+    }
 
-}
+    public function eliminar(Request $request, $id)
+
+    {
+        $estudiante = Estudiante::where("id_estudiante", $id)->first();
+
+        if($estudiante == null){
+            $mensaje = array(
+                "error"=> "Estudiante no encontrado."
+            );
+
+            return response()->json($mensaje, 404);
+        }
+
+        $estudiante->estado_estudiante= 0;
+        $estudiante->save();
+        $mensaje = array(
+            "mensaje"=> "El estudiante fue borrado exitosamente"
+        );
+
+        return response()->json($mensaje);
+    }
+    }
 

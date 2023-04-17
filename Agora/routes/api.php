@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\EstudianteController;
-use App\Http\Controllers\Nivel_satisfaccionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,13 @@ use App\Http\Controllers\Nivel_satisfaccionController;
     return $request->user();
 });*/
 
-
+//Rutas para el controlador Estudiante
 Route::get("/estudiante/listar",[EstudianteController::class, "listar"]);
-Route::get("/estudiante/obtener/{id_estudiante}",[EstudianteController::class, "obtener"]);
+Route::get("/estudiante/obtener/{id}",[EstudianteController::class, "obtener"]);
 Route::post("/estudiante/insertar",[EstudianteController::class, "insertar"]);
+Route::put("/estudiante/actualizar/{id}",[EstudianteController::class, "actualizar"]);
+Route::delete("/estudiante/eliminar/{id}",[EstudianteController::class, "eliminar"]);
 
-//Nivel
-Route::get("/nivel_satisfaccion/listar",[Nivel_satisfaccionController::class, "listar"]);
+
+
 
