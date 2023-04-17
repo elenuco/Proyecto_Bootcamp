@@ -11,9 +11,10 @@ class Departamento extends Model
 
     protected $table = "departamento";
     public $timestamp = false;
+    
     protected $fillable = [
         'nombre_departamento',
     ];
 
-    protected $primaryKey= 'id_departamento';
+    protected $primaryKey = 'id_departamento';
 }

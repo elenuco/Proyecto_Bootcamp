@@ -5,19 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pregunta extends Model
+class Unidad extends Model
 {
     use HasFactory;
-
-    protected $table = 'pregunta';
+    protected $table = 'unidad';
     public $timestamp = false;
 
     protected $fillable = [
-        'pregunta',
-        'puntaje_pregunta',
-        'cuestionario_id'
+        'numero_unidad',
+        'nombre_unidad',
+        'estado_unidad',
+        'mate_id'
     ];
 
-    protected $primaryKey = 'id_pregunta';
-
+    protected $primaryKey = 'id_unidad';
 }

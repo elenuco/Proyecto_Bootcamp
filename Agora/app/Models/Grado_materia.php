@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pregunta extends Model
+class Grado_materia extends Model
 {
     use HasFactory;
 
-    protected $table = 'pregunta';
+    protected $table = 'grado_materia';
     public $timestamp = false;
 
     protected $fillable = [
-        'pregunta',
-        'puntaje_pregunta',
-        'cuestionario_id'
+        'grade_id',
+        'materia_id',
     ];
 
-    protected $primaryKey = 'id_pregunta';
-
+    protected $primaryKey = 'id_grado_materia';
 }

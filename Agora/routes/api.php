@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
-
+use App\Http\Controllers\InsigniaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +35,16 @@ Route::get("/institucion/obtener/{id}",[InstitucionController::class,"obtener"])
 Route::post("/institucion/insertar",[InstitucionController::class,"insertar"]);
 Route::put("/institucion/actualizar/{id}",[InstitucionController::class,"actualizar"]);
 Route::delete("/institucion/eliminar/{id}",[InstitucionController::class, "eliminar"]);
+
+//Rutas para el controlador Insignia
+Route::get("/insignia/listar",[InsigniaController::class,"listar"]);
+Route::get("/insignia/obtener/{id}",[InsigniaController::class,"obtener"]);
+Route::post("/insignia/insertar",[InsigniaController::class,"insertar"]);
+Route::put("/insignia/actualizar/{id}",[InsigniaController::class,"actualizar"]);
+Route::delete("/insignia/eliminar/{id}",[InsigniaController::class,"eliminar"]);
+
+
+
 
 
 
