@@ -16,7 +16,6 @@ class Institucion extends Model
         'nombre_institucion',
         'tipo_institucion',
         'estado_institucion',
-        'logo',
         'municipio_id'
     ];
 

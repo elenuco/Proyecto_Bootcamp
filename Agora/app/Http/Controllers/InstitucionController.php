@@ -18,7 +18,7 @@ class InstitucionController extends Controller
         $institucion = DB::table('institucion')
             ->join('municipio', 'institucion.municipio_id', '=', 'municipio.id_municipio')
             ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
-            ->select('institucion.id_institucion', 'institucion.nombre_institucion', 'institucion.tipo_institucion', 'institucion.estado_institucion', 'institucion.logo', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento')
+            ->select('institucion.id_institucion', 'institucion.nombre_institucion', 'institucion.tipo_institucion', 'institucion.estado_institucion','municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento')
             ->orderBy('institucion.id_institucion', 'asc')
             ->get();
 
@@ -38,7 +38,7 @@ class InstitucionController extends Controller
             ->where('institucion.id_institucion', '=', $id)
             ->join('municipio', 'institucion.municipio_id', '=', 'municipio.id_municipio')
             ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
-            ->select('institucion.id_institucion', 'institucion.nombre_institucion', 'institucion.tipo_institucion', 'institucion.estado_institucion', 'institucion.logo', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento');
+            ->select('institucion.id_institucion', 'institucion.nombre_institucion', 'institucion.tipo_institucion', 'institucion.estado_institucion','municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento');
         $institucion = $institucion->first();
 
         if ($institucion == null) {
@@ -74,7 +74,6 @@ class InstitucionController extends Controller
             'nombre_institucion' => $request->nombre_institucion,
             'tipo_institucion' => $request->tipo_institucion,
             'estado_institucion' => 1,
-            'logo' => $request->logo,
             'municipio_id' => $request->municipio_id,
         );
 
@@ -108,7 +107,6 @@ class InstitucionController extends Controller
 
         $institucion->nombre_institucion = $request->nombre_institucion;
         $institucion->tipo_institucion = $request->tipo_institucion;
-        $institucion->logo = $request->logo;
         $institucion->municipio_id = $request->municipio_id;
         $institucion->save();
 
