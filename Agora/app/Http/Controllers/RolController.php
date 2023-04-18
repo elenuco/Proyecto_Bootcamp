@@ -10,7 +10,7 @@ class RolController extends Controller
 {
     public function listarRol(Request $request)
     {
-        $rol= Rol::select('id_rol', 'rol_tipo')->get();
+        $rol= Rol::select('id_rol', 'tipo_rol','estado_rol')->get();
         return response()->json($rol);
     }
     public function obtenerRol(Request $Request, $id_rol)
@@ -21,7 +21,9 @@ class RolController extends Controller
     public function ingresarRol(Request $request)
     {
         $data= array(
-            'rol_tipo'=>$request->rol_tipo
+            'tipo_rol'=>$request->tipo_rol,
+            'estado_rol'=>$request->estado_rol
+
         );
         // return $data;
         $nuevo_rol= new Rol($data);
@@ -32,7 +34,8 @@ class RolController extends Controller
     {
         $rol= Rol::where('id',$id)->first;
         $data= array(
-            'tipo_rol'=>$request->tipo_rol
+            'tipo_rol'=>$request->tipo_rol,
+            'estado_rol'=>$request->estado_rol
         );
         $rol->save();
         return response()->json($rol);

@@ -11,6 +11,7 @@ class Rol extends Model
     protected $table= "rol";
 public $timestamps=false;
     protected $fillable = [
-        'rol_tipo'
+        'tipo_rol',
+        'estado_rol'
     ];
 }
