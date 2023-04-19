@@ -7,6 +7,7 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\InsigniaController;
 use App\Http\Controllers\CuestionarioController;
+use App\Http\Controllers\ResenaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,13 @@ Route::delete("/insignia/eliminar/{id}",[InsigniaController::class,"eliminar"]);
 //Rutas para controlador Cuestionario
 Route::get("/cuestionario/listar", [CuestionarioController::class, 'listar']);
 Route::get("/cuestionario/obtener/{id}", [CuestionarioController::class, 'obtener']);
+
+
+//Ruta para Controlador Resena
+Route::get("/resena/listar", [ResenaController::class, 'listar']);
+Route::get("/resena/obtener/{id}", [ResenaController::class, 'obtener']);
+Route::delete("/resena/eliminar/{id}",[ResenaController::class, "eliminar"]);
+
 
 
 

@@ -57,7 +57,7 @@ class EstudianteController extends Controller
             ->join('municipio', 'estudiante.munici_id', '=', 'municipio.id_municipio')
             ->join('departamento', 'municipio.departamento_id', '=', 'departamento.id_departamento')
             ->select('estudiante.id_estudiante', 'nie', 'usuario.nombre', 'usuario.apellido', 'estudiante.fecha_nacimiento', 'estudiante.genero', 'estudiante.foto', 'estudiante.telefono', 'estudiante.estado_estudiante', 'usuario.correo AS correo', 'grado.grado_academico AS grado', 'institucion.nombre_institucion AS institucion', 'municipio.nombre_municipio AS municipio', 'departamento.nombre_departamento AS departamento');
-            $estudiante = $estudiante->first();
+        $estudiante = $estudiante->first();
 
         if ($estudiante == null) {
             $mensaje = array(
@@ -99,7 +99,7 @@ class EstudianteController extends Controller
         }
 
         $institucion = Institucion::where('id_institucion', '=', $request->institucion_id)
-        ->where('estado_institucion', '=', 1)->first();
+            ->where('estado_institucion', '=', 1)->first();
         if ($institucion == null) {
             $mensaje = array(
                 'mensaje' => "Institucion no encontrada o no activa."
@@ -124,7 +124,7 @@ class EstudianteController extends Controller
 
         $datos = array(
             'nie' => $request->nie,
-            'fecha_nacimiento' => $request->fecha_nacimiento,        
+            'fecha_nacimiento' => $request->fecha_nacimiento,
             'genero' => $request->genero,
             'foto' => $nombreImagen,
             'telefono' => $request->telefono,
@@ -189,20 +189,18 @@ class EstudianteController extends Controller
             return response()->json($mensaje, 404);
         }
 
-        $estudiante->nie=$request->nie;
-        $estudiante->foto= $nombreImagen;
-        $estudiante->telefono=$request->telefono;
-        $estudiante->grado_id=$request->grado_id;
-        $estudiante->institucion_id=$request->institucion_id;
-        $estudiante->munici_id=$request->munici_id;
+        $estudiante->nie = $request->nie;
+        $estudiante->foto = $nombreImagen;
+        $estudiante->telefono = $request->telefono;
+        $estudiante->grado_id = $request->grado_id;
+        $estudiante->institucion_id = $request->institucion_id;
+        $estudiante->munici_id = $request->munici_id;
 
         $imagen->storeAs('fotos-estudiante/', $nombreImagen);
 
         $estudiante->save();
 
         return response()->json($estudiante);
-
-
     }
 
     public function eliminar(Request $request, $id)
@@ -210,18 +208,18 @@ class EstudianteController extends Controller
     {
         $estudiante = Estudiante::where("id_estudiante", $id)->first();
 
-        if($estudiante == null){
+        if ($estudiante == null) {
             $mensaje = array(
-                "error"=> "Estudiante no encontrado."
+                "error" => "Estudiante no encontrado."
             );
 
             return response()->json($mensaje, 404);
         }
 
-        $estudiante->estado_estudiante= 0;
+        $estudiante->estado_estudiante = 0;
         $estudiante->save();
         $mensaje = array(
-            "mensaje"=> "El estudiante fue borrado exitosamente"
+            "mensaje" => "El estudiante fue borrado exitosamente"
         );
 
         return response()->json($mensaje);
@@ -247,5 +245,4 @@ class EstudianteController extends Controller
 
         return $respuesta;
     }
-    }
-
+}
