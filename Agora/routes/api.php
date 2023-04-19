@@ -52,13 +52,13 @@ Route::delete("/insignia/eliminar/{id}",[InsigniaController::class,"eliminar"]);
 Route::get("/cuestionario/listar", [CuestionarioController::class, 'listar']);
 Route::get("/cuestionario/obtener/{id}", [CuestionarioController::class, 'obtener']);
 
-
 //Rutas para controlador Unidad
 Route::get("/unidad/listar", [UnidadController::class, 'listar']);
 Route::get("/unidad/obtener/{id}", [UnidadController::class, 'obtener']);
 Route::post("/unidad/insertar", [UnidadController::class, 'insertar']);
 Route::put("/unidad/actualizar/{id}", [UnidadController::class, 'actualizar']);
 Route::delete("/unidad/eliminar/{id}", [UnidadController::class, 'eliminar']);
+
 //Ruta para Controlador Resena
 Route::get("/resena/listar", [ResenaController::class, 'listar']);
 Route::get("/resena/obtener/{id}", [ResenaController::class, 'obtener']);
