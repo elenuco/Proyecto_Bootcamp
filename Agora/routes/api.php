@@ -27,7 +27,7 @@ use App\Http\Controllers\CuestionarioController;
 Route::get("/estudiante/listar",[EstudianteController::class, "listar"]);
 Route::get("/estudiante/obtener/{id}",[EstudianteController::class, "obtener"]);
 Route::post("/estudiante/insertar",[EstudianteController::class, "insertar"]);
-Route::put("/estudiante/actualizar/{id}",[EstudianteController::class, "actualizar"]);
+Route::post("/estudiante/actualizar/{id}",[EstudianteController::class, "actualizar"]);
 Route::delete("/estudiante/eliminar/{id}",[EstudianteController::class, "eliminar"]);
 
 //Rutas para el controlador Institucion
@@ -41,7 +41,7 @@ Route::delete("/institucion/eliminar/{id}",[InstitucionController::class, "elimi
 Route::get("/insignia/listar",[InsigniaController::class,"listar"]);
 Route::get("/insignia/obtener/{id}",[InsigniaController::class,"obtener"]);
 Route::post("/insignia/insertar",[InsigniaController::class,"insertar"]);
-Route::put("/insignia/actualizar/{id}",[InsigniaController::class,"actualizar"]);
+Route::post("/insignia/actualizar/{id}",[InsigniaController::class,"actualizar"]);
 Route::delete("/insignia/eliminar/{id}",[InsigniaController::class,"eliminar"]);
 
 

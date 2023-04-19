@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use App\Models\Insignia;
 use App\Http\Requests\NuevaInsigniaRequest;
 
@@ -55,13 +58,21 @@ class InsigniaController extends Controller
     {
         $request->validated();
 
+        $imagen = $request->file('imagen_insignia');
+        $extension = $imagen->extension();
+
+        $nombreImagen = Str::slug($request->nombre_insignia) . "." . $extension;
+
+
         $datos = array(
             'nombre_insignia' => $request->nombre_insignia,
-            'imagen_insignia' => $request->imagen_insignia,
+            'imagen_insignia' => $nombreImagen,
             'puntaje_max' => $request->puntaje_max,
             'puntaje_min' => $request->puntaje_min,
             'estado_insignia' => 1,
         );
+
+        $imagen->storeAs('fotos-insignia/', $nombreImagen);
 
         $nuevaInsignia = new Insignia($datos);
         $nuevaInsignia->save();
@@ -75,6 +86,11 @@ class InsigniaController extends Controller
 
     public function actualizar(Request $request, $id)
     {
+        $imagen = $request->file('imagen_insignia');
+        $extension = $imagen->extension();
+
+        $nombreImagen = Str::slug($request->nombre_insignia) . "." . $extension;
+
         $insignia = Insignia::where('id_insignia', $id)->first();
         if ($insignia == null) {
             $mensaje = array(
@@ -84,9 +100,11 @@ class InsigniaController extends Controller
         }
 
         $insignia->nombre_insignia = $request->nombre_insignia;
-        $insignia->imagen_insignia = $request->imagen_insignia;
+        $insignia->imagen_insignia = $nombreImagen;
         $insignia->puntaje_max = $request->puntaje_max;
         $insignia->puntaje_min = $request->puntaje_min;
+
+        $imagen->storeAs('fotos-insignia/', $nombreImagen);
         $insignia->save();
         return response()->json($insignia);
     }
@@ -109,5 +127,26 @@ class InsigniaController extends Controller
             "mensaje" => "La insignia fue borrada exitosamente"
         );
         return response()->json($mensaje);
+    }
+
+    public function verFotoInsignia($nombreImagen)
+    {
+
+        $ruta = storage_path('app/fotos-insignia/' . $nombreImagen);
+
+
+        if (file_exists($ruta) == false) {
+            abort(404);
+        }
+
+        $imagen = File::get($ruta);
+
+        $tipo = File::mimeType($ruta);
+
+        $respuesta = Response::make($imagen, 200);
+
+        $respuesta->header("Content-Type", $tipo);
+
+        return $respuesta;
     }
 }
