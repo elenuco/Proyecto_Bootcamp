@@ -7,12 +7,9 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\InsigniaController;
 use App\Http\Controllers\CuestionarioController;
-<<<<<<< HEAD
 use App\Http\Controllers\UnidadController;
 
-=======
 use App\Http\Controllers\ResenaController;
->>>>>>> ffce76764940cd4b8054d72ae45c47e70c4d40c5
 
 /*
 |--------------------------------------------------------------------------
@@ -56,14 +53,12 @@ Route::get("/cuestionario/listar", [CuestionarioController::class, 'listar']);
 Route::get("/cuestionario/obtener/{id}", [CuestionarioController::class, 'obtener']);
 
 
-<<<<<<< HEAD
 //Rutas para controlador Unidad
 Route::get("/unidad/listar", [UnidadController::class, 'listar']);
 Route::get("/unidad/obtener/{id}", [UnidadController::class, 'obtener']);
 Route::post("/unidad/insertar", [UnidadController::class, 'insertar']);
 Route::put("/unidad/actualizar/{id}", [UnidadController::class, 'actualizar']);
 Route::delete("/unidad/eliminar/{id}", [UnidadController::class, 'eliminar']);
-=======
 //Ruta para Controlador Resena
 Route::get("/resena/listar", [ResenaController::class, 'listar']);
 Route::get("/resena/obtener/{id}", [ResenaController::class, 'obtener']);
@@ -72,4 +67,3 @@ Route::delete("/resena/eliminar/{id}",[ResenaController::class, "eliminar"]);
 
 
 
->>>>>>> ffce76764940cd4b8054d72ae45c47e70c4d40c5
