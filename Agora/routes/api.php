@@ -7,6 +7,8 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\InsigniaController;
 use App\Http\Controllers\CuestionarioController;
+use App\Http\Controllers\UnidadController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +52,9 @@ Route::get("/cuestionario/listar", [CuestionarioController::class, 'listar']);
 Route::get("/cuestionario/obtener/{id}", [CuestionarioController::class, 'obtener']);
 
 
-
+//Rutas para controlador Unidad
+Route::get("/unidad/listar", [UnidadController::class, 'listar']);
+Route::get("/unidad/obtener/{id}", [UnidadController::class, 'obtener']);
+Route::post("/unidad/insertar", [UnidadController::class, 'insertar']);
+Route::put("/unidad/actualizar/{id}", [UnidadController::class, 'actualizar']);
+Route::delete("/unidad/eliminar/{id}", [UnidadController::class, 'eliminar']);

@@ -9,7 +9,7 @@ class Resena extends Model
 {
     use HasFactory;
     protected $table = 'resena';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'puntuacion',

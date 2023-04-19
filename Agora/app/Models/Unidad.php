@@ -9,7 +9,7 @@ class Unidad extends Model
 {
     use HasFactory;
     protected $table = 'unidad';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'numero_unidad',
