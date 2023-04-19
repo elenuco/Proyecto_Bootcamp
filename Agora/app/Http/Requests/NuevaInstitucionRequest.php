@@ -26,13 +26,10 @@ class NuevaInstitucionRequest extends FormRequest
     {
         return [
             'nombre_institucion' => array(
-                'required'
+                'required','string'
             ),
             'tipo_institucion' => array(
                 'required', 'string', Rule::in(['pública', 'privada'])
-            ),
-            'logo' => array(
-                'required', 'string'
             ),
             'municipio_id' => array(
                 'required', 'integer'
@@ -43,11 +40,10 @@ class NuevaInstitucionRequest extends FormRequest
     {
         return array(
             'nombre_institucion.required' => "Se requiere de un nombre para la institucion",
+            'nombre_institucion.string' => "Se debe ingresar solo texto",
             'tipo_institucion.required' => "Se requiere el tipo de institucion",
             'tipo_institucion.string' => "El tipo de institucion debe ser cadena de texto",
             'tipo_institucion.in' => "El tipo de institucion debe ser pública o privada",
-            'logo.required' => "Se requiere de un logo",
-            'logo.string' => "El logo debe ser una url",
             'municipio_id.required' => "Se requiere de un municipio",
             'municipio_id.integer' => "El municipio debe ser un numero entero",
         );

@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('insignia/imagen/{nombreImagen}', [AutenticacionController::class, "verFotoInsignia"]);
+Route::get('estudiante/foto/{nombreImagen}', [AutenticacionController::class, "verFotoEstudiante"]);
+
