@@ -9,7 +9,7 @@ class Cuestionario extends Model
 {
     use HasFactory;
     protected $table = "cuestionario";
-    public $timestamp = false;
+    public $timestamps = false;
     
     protected $fillable = [
         'nombre_cuestionario',

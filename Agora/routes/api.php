@@ -51,6 +51,9 @@ Route::delete("/insignia/eliminar/{id}",[InsigniaController::class,"eliminar"]);
 //Rutas para controlador Cuestionario
 Route::get("/cuestionario/listar", [CuestionarioController::class, 'listar']);
 Route::get("/cuestionario/obtener/{id}", [CuestionarioController::class, 'obtener']);
+Route::post("/cuestionario/insertar", [CuestionarioController::class, 'insertar']);
+Route::put("/cuestionario/actualizar/{id}", [CuestionarioController::class, 'actualizar']);
+Route::delete("/cuestionario/eliminar/{id}", [CuestionarioController::class, 'eliminar']);
 
 //Rutas para controlador Unidad
 Route::get("/unidad/listar", [UnidadController::class, 'listar']);
