@@ -71,4 +71,7 @@ Route::delete("/resena/eliminar/{id}",[ResenaController::class, "eliminar"]);
 //Ruta listar Municipios
 Route::get("/municipio/listar", [MunicipioController::class, 'listar']);
 
+//Ruta listar Departamento
+Route::get("/departamento/listar", [MunicipioController::class, 'listarDepartamento']);
+
 

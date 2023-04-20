@@ -20,4 +20,18 @@ class MunicipioController extends Controller
 
         return response()->json($municipio);
     }
+
+    public function listarDepartamento(Request $request)
+    {
+        $depa=Departamento::all();
+        $depa=DB::table('departamento')
+        ->select('id_departamento','nombre_departamento')
+        ->orderBy('id_departamento', 'asc')
+        ->get();
+
+        return response()->json($depa);
+        
+
+
+    }
 }
