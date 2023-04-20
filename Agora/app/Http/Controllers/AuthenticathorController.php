@@ -71,10 +71,11 @@ class AuthenticathorController extends Controller
         if (file_exists($ruta)==false) {
             abort(404);
         }
-    }
-    $imagen= File::get($ruta);
+        $imagen= File::get($ruta);
     $tipo= File::mimeType($ruta);
     $respuesta=Response::make($imagen, 200);
     $respuesta=header("Content-Type", $tipo);
     return $respuesta;
+    }
+    
 }
