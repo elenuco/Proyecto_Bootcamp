@@ -11,6 +11,7 @@ use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\UnidadController;
 
 use App\Http\Controllers\ResenaController;
+use App\Http\Controllers\RolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,5 +74,9 @@ Route::get("/municipio/listar", [MunicipioController::class, 'listar']);
 
 //Ruta listar Departamento
 Route::get("/departamento/listar", [MunicipioController::class, 'listarDepartamento']);
+
+//Ruta listar rol
+Route::get("/rol/listar", [RolController::class, 'listar']);
+
 
 
