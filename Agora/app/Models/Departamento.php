@@ -10,7 +10,7 @@ class Departamento extends Model
     use HasFactory;
 
     protected $table = "departamento";
-    public $timestamp = false;
+    public $timestamps = false;
     
     protected $fillable = [
         'nombre_departamento',

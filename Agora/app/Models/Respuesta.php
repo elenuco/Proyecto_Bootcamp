@@ -10,7 +10,7 @@ class Respuesta extends Model
     use HasFactory;
 
     protected $table = 'respuesta';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'opciones',

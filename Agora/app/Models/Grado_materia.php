@@ -10,7 +10,7 @@ class Grado_materia extends Model
     use HasFactory;
 
     protected $table = 'grado_materia';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'grade_id',

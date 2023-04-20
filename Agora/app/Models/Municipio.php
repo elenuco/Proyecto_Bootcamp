@@ -10,7 +10,7 @@ class Municipio extends Model
     use HasFactory;
 
     protected $table = 'municipio';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'nombre_municipio',

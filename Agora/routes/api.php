@@ -12,6 +12,8 @@ use App\Http\Controllers\UnidadController;
 
 use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\PreguntaController;
+use App\Http\Controllers\RespuestaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,5 +80,8 @@ Route::get("/departamento/listar", [MunicipioController::class, 'listarDepartame
 //Ruta listar rol
 Route::get("/rol/listar", [RolController::class, 'listar']);
 
+//Ruta listar pregunta
+Route::get("/pregunta/listar", [PreguntaController::class, 'listar']);
 
-
+//Ruta listar respuesta
+Route::get("/respuesta/listar", [RespuestaController::class, 'listar']);

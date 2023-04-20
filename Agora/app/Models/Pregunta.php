@@ -10,7 +10,7 @@ class Pregunta extends Model
     use HasFactory;
 
     protected $table = 'pregunta';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'pregunta',
