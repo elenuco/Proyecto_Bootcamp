@@ -7,6 +7,7 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\InsigniaController;
 use App\Http\Controllers\CuestionarioController;
+use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\UnidadController;
 
 use App\Http\Controllers\ResenaController;
@@ -67,6 +68,7 @@ Route::get("/resena/listar", [ResenaController::class, 'listar']);
 Route::get("/resena/obtener/{id}", [ResenaController::class, 'obtener']);
 Route::delete("/resena/eliminar/{id}",[ResenaController::class, "eliminar"]);
 
-
+//Ruta listar Municipios
+Route::get("/municipio/listar", [MunicipioController::class, 'listar']);
 
 
