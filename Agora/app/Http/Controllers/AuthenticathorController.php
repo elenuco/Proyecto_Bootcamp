@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\usuarios;
 use Illuminate\Http\Request;
 use DateTime;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 //Libreria para formatear texto
 use Illuminate\Support\Str;
@@ -74,8 +74,8 @@ class AuthenticathorController extends Controller
         $imagen= File::get($ruta);
     $tipo= File::mimeType($ruta);
     $respuesta=Response::make($imagen, 200);
-    $respuesta=header("Content-Type", $tipo);
+    $respuesta->header("Content-Type", $tipo);
     return $respuesta;
     }
-    
+
 }
