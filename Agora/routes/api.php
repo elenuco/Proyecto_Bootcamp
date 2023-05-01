@@ -1,8 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\InsigniaController;
@@ -14,7 +10,9 @@ use App\Http\Controllers\ResenaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\RespuestaController;
-
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -85,3 +83,17 @@ Route::get("/pregunta/listar", [PreguntaController::class, 'listar']);
 
 //Ruta listar respuesta
 Route::get("/respuesta/listar", [RespuestaController::class, 'listar']);
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+});
+Route::get('/rol/listarRol',[RolController::class, 'listarRol']);
+Route::get('/rol/obtenerRol/{id}', [RolController::class,'obtenerRol']);
+Route::post('/rol/ingresarRol',[RolController::class,'ingresarRol']);
+Route::put('rol/actualizarRol/{id}',[RolController::class,'actualizar']);
+Route::delete('rol/delete/{id}', [RolController::class,'eliminar']);
+Route::get('usuarios/listarUsuario', [UsuarioController::class, 'listaUsuarios']);
+Route::get('usuarios/obtenerUsuario/{id}',[UsuarioController::class,'obtenerUsuario']);
+Route::post('usuarios/ingresarUsuario', [UsuarioController::class,'ingresarUsuario']);
+Route::put('usuarios/actualizar/{id}', [UsuarioController::class,'actualizarUsuario']);
+Route::delete('usuarios/eliminar/{id}', [UsuarioController::class,'eliminar']);
+
